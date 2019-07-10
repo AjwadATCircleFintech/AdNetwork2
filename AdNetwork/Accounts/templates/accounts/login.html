@@ -20,11 +20,12 @@
           <div class="has-text-centered">
               <img class="login-logo" src="{% static 'accounts/assets/img/logo.png' %}">
           </div>
-
+      <form action="accounts/confirmation" method="post">
+          {% csrf_token %}
           <div class="field">
             <label class="label">Username</label>
             <div class="control has-icons-right">
-              <input class="input" type="text">
+              <input class="input" name="Username" type="text">
               <span class="icon is-small is-right">
                 <i class="fa fa-user"></i>
               </span>
@@ -34,15 +35,16 @@
           <div class="field">
             <label class="label">Password</label>
             <div class="control has-icons-right">
-              <input class="input" type="password">
+              <input class="input" name="Password" type="password">
               <span class="icon is-small is-right">
                 <i class="fa fa-key"></i>
               </span>
             </div>
           </div>
           <div class="has-text-centered">
-            <a class="button is-vcentered is-primary is-outlined" href="accounts/confirmation">Login</a>
+            <input class="button is-vcentered is-primary is-outlined" type="submit" value="Login">
           </div>
+      </form>
           <div class="has-text-centered">
             <a href="accounts/signup"> Don't you have an account? Sign up now!</a>
           </div>

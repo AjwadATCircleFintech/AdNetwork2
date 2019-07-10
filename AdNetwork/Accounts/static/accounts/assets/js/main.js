@@ -1,7 +1,7 @@
 var partJson = {
   "particles": {
     "number": {
-      "value": 90 ,
+      "value": 95 ,
       "density": {
         "enable": true,
         "value_area": 800
