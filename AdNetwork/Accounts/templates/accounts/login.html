@@ -20,7 +20,7 @@
           <div class="has-text-centered">
               <img class="login-logo" src="{% static 'accounts/assets/img/logo.png' %}">
           </div>
-      <form action="accounts/confirmation" method="post">
+      <form action="{% url 'confirmation' %}" method="post">
           {% csrf_token %}
           <div class="field">
             <label class="label">Username</label>
@@ -46,7 +46,7 @@
           </div>
       </form>
           <div class="has-text-centered">
-            <a href="accounts/signup"> Don't you have an account? Sign up now!</a>
+            <a href="{% url 'signup' %}"> Don't you have an account? Sign up now!</a>
           </div>
         </section>
       </div>

@@ -41,7 +41,7 @@ var partJson = {
       "anim": {
         "enable": false,
         "speed": 40,
-        "size_min": 1,
+        "size_min": 2,
         "sync": false
       }
     },
