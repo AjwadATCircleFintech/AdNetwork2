@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Accounts
 from django.contrib.auth import authenticate
 
 
@@ -10,9 +11,28 @@ def login(request):
     return render(request, 'accounts/login.html')
 
 
-def signup(request):
+def signup(request): # clean this up later
+
+
 
     return render(request, 'accounts/signup.html')
+
+def login_process(request):
+
+    #We need a validator for this
+
+    username = request.POST['username']
+    fist_name = request.POST['first_name']
+    last_name = request.POST['last_name']
+    email = request.POST['email']
+    password = request.POST['password']
+    re_password = request.POST['re_password']
+
+    if password == re_password:
+        Accounts.objects.create_user(username=username, password=password, email=email, first_name=fist_name, last_name=last_name)
+        return render(request,'accounts/confirmation.html')
+    else:
+        return redirect('/')
 
 def confirmation(request):
     username = request.POST['Username']
