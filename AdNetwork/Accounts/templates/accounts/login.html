@@ -20,7 +20,7 @@
           <div class="has-text-centered">
               <img class="login-logo" src="{% static 'accounts/assets/img/logo.png' %}">
           </div>
-      <form action="{% url 'confirmation' %}" method="post">
+      <form action="{% url 'login' %}" method="post">
           {% csrf_token %}
           <div class="field">
             <label class="label">Username</label>
