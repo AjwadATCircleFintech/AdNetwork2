@@ -36,7 +36,9 @@ def login(request):
 
 
 def signup(request): # clean this up later
-
+    # We s shouldn't save users without being able to send them an email link
+    # This will definitely cause errors in the future
+    # I think we need to deal with email links in a smarter way
     if request.method == 'POST':
         username = request.POST['username']
         fist_name = request.POST['first_name']
@@ -86,8 +88,13 @@ def Email_link(request,newuser):
     email = EmailMessage(
             mail_subject, message, to=[to_email]
     )
+    print(mail_subject)
+    print(message)
+    print(to_email)
     email.send()
-    return HttpResponse('Please confirm your email address to complete the registration')
+    print("Sending Email passed")
+
+    return redirect('login')
 
 def activate(request,uidb64,token):
     try:
