@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Accounts
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
@@ -24,7 +25,7 @@ def login(request):
         print(user)
         if user is not None:
             print("This got triggered")
-            login(request,user)
+            auth_login(request,user)
             return render(request, 'accounts/confirmation.html')
         else:
             print("No this one got triggered")
@@ -52,7 +53,7 @@ def signup(request): # clean this up later
            NewUser.is_active = False
            NewUser.save()
            Email_link(request,NewUser)
-           #return redirect('login')
+           return redirect('login')
         else:
             return redirect('signup')
 
@@ -60,13 +61,9 @@ def signup(request): # clean this up later
 
         return render(request, 'accounts/signup.html')
 
-
-
-
-
 def recovery(request):
 
-    return render(request,'accounts/recovery.html')
+     return render(request,'accounts/recovery.html')
 
 def DummyDashBoard(request):
 
@@ -88,11 +85,8 @@ def Email_link(request,newuser):
     email = EmailMessage(
             mail_subject, message, to=[to_email]
     )
-    print(mail_subject)
-    print(message)
-    print(to_email)
+
     email.send()
-    print("Sending Email passed")
 
     return redirect('login')
 
@@ -103,10 +97,12 @@ def activate(request,uidb64,token):
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
     if user is not None and account_activation_token.check_token(user, token):
+        #This also includes logic for if the activation token was already consumed so we don't gotta worry abt this one
+        #
         user.is_active = True
         user.save()
-        login(request, user)
-        # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        #login(request, user)
+        #return redirect('home')
+        return redirect('login')
     else:
-        return HttpResponse('Activation link is invalid!')
+        return redirect('signup')
