@@ -21,6 +21,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'curbyourdota2@gmail.com'
 EMAIL_HOST_PASSWORD = 'azrafanwar12'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
