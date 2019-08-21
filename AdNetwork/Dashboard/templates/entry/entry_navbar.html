@@ -1,0 +1,32 @@
+{% extends "entry/entry_static_script.html" %}
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+         <a class="navbar-brand" href="#">
+            <img src="{% static 'accounts/assets/img/logo.png' %}" width="50" height="50">
+        </a>
+      <li class="nav-item">
+        <a class="nav-link" width="50" height="50" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" width="50" height="50" href="{% url 'entry_account' %}">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" width="50" height="50" href="#">Create Company</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" width="50" height="50" href="{% url 'signout' %}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
+
+

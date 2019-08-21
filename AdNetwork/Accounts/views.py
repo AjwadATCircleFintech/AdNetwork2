@@ -3,6 +3,7 @@ from .models import Accounts
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
@@ -26,7 +27,8 @@ def login(request):
         if user is not None:
             print("This got triggered")
             auth_login(request,user)
-            return render(request, 'accounts/confirmation.html')
+            request.session['username'] = user.username
+            return redirect('entry')
         else:
             print("No this one got triggered")
             return render(request, 'accounts/login.html')
@@ -35,6 +37,11 @@ def login(request):
 
         return render(request, 'accounts/login.html')
 
+def signout(request):
+
+    auth_logout(request)
+
+    return redirect('login')
 
 def signup(request): # clean this up later
     # We s shouldn't save users without being able to send them an email link
@@ -65,9 +72,7 @@ def recovery(request):
 
      return render(request,'accounts/recovery.html')
 
-def DummyDashBoard(request):
 
-    return None
 
 def Email_link(request,newuser):
     #form = SignupForm(request.POST)

@@ -1,0 +1,19 @@
+{% include "entry/entry_navbar.html" %}
+{% load static %}
+<div class="container-fluid">
+    <div class="align-items-center">
+        <div class="col-4">
+            <table class="table table-striped">
+                <tbody>
+                {% for k, v in items.items %}
+                    <tr>
+                        <td><b>{{ k }}</b></td>
+                        <td>{{v}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'entry_account_update' %}" type="button" class="btn btn-primary">Update Account page</a>
+        </div>
+    </div>
+</div>
